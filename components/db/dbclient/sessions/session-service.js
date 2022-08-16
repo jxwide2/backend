@@ -1,10 +1,11 @@
 import {database} from "../db";
 
 export async function sessionCreate(createSessionDto) {
-    // let session = database()
-    //     .select('id')
-    //     .from('sessions')
-    //     .where('name', createSessionDto.name)
-    // if (session) throw new Error('session already exists')
-    return database('sessions').insert(createSessionDto);
+
+    const a = await database('sessions').insert(createSessionDto);
+    return a
+}
+
+export async function sessionGet(sessionForeignId) {
+    return database('sessions').where('id', sessionForeignId)
 }
