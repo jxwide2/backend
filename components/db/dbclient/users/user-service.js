@@ -21,7 +21,6 @@ export async function login(username, password) {
     }
     return user;
 }
-
 // export async function test() {
 //     let candidate = database()
 //         .select('id')
