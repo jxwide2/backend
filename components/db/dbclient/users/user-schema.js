@@ -6,6 +6,7 @@ export function createUsersTable() {
             return database.schema.createTable('users', function(t) {
                 t.increments();
                 t.string('username');
+                t.unique(['username']);
                 t.string('password');
                 t.string('firstname');
                 t.string('lastname');
@@ -15,3 +16,6 @@ export function createUsersTable() {
     });
 }
 
+export function dropUsersTable() {
+    database.schema.dropTable('users')
+}
