@@ -1,4 +1,4 @@
-import {database} from "./db";
+import {database} from "../db";
 
 export async function findAll() {
     return database('users');
@@ -9,7 +9,7 @@ export async function create(createUserDto) {
         .select('id')
         .from('users')
         .where('username', createUserDto.username)
-    if (candidate) throw new Error('user already exists')
+    if (candidate) throw new Error('users already exists')
     return database('users').insert(createUserDto);
 }
 

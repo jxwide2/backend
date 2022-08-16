@@ -1,4 +1,4 @@
-import {database} from "./db";
+import {database} from "../db";
 
 export function createUsersTable() {
     database.schema.hasTable('users').then(function(exists) {

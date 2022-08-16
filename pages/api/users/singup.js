@@ -1,4 +1,4 @@
-import {create} from "../../../components/db/dbclient/user-service";
+import {create} from "../../../components/db/dbclient/users/user-service";
 
 export default function handler(req, res) {
     const {method} = req;

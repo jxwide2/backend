@@ -1,4 +1,4 @@
-import {findAll} from "../../../components/db/dbclient/user-service";
+import {findAll} from "../../../components/db/dbclient/users/user-service";
 
 export default function handler(req, res) {
     let users = findAll();
