@@ -4,7 +4,7 @@ export async function findAll() {
     return database('users');
 }
 
-export async function create(createUserDto) {
+export async function userCreate(createUserDto) {
     let candidate = database()
         .select('id')
         .from('users')
@@ -13,7 +13,7 @@ export async function create(createUserDto) {
     return database('users').insert(createUserDto);
 }
 
-export async function login(username, password) {
+export async function userLogin(username, password) {
     let user = database('users')
         .where('username', username);
     if (password !== user.password) {

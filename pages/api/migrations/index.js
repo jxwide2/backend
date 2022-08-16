@@ -4,5 +4,5 @@ import {createSessionsTable} from "../../../components/db/dbclient/sessions/sess
 export default function handler(req, res) {
     createUsersTable();
     createSessionsTable();
-    //res.status(200).json({ name: 'John Doe' })
+    res.status(200).json({ message: 'OK' })
 }
