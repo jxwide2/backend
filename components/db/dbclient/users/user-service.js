@@ -7,11 +7,10 @@ export async function findAll() {
 
 export async function userCreate(createUserDto) {
     try {
-        let insertInfo = await database('users').insert(createUserDto);
-        let user = await database('users')
+        await database('users').insert(createUserDto);
+        return database('users')
             .where('username', createUserDto.username)
             .first();
-        return user;
     } catch (e) {
         return e;
     }
