@@ -1,5 +1,7 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import {authMiddleware} from "../../lib/middleware/auth";
 
-export default function handler(req, res) {
+
+
+export default authMiddleware((req, res) => {
   res.status(200).json({ name: 'John Doe' })
-}
+})
