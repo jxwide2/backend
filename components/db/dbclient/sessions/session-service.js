@@ -3,7 +3,7 @@ import {getSessionsIdsWhereUserId, getUsersIdsFromSession} from "../users_sessio
 import {getUserInfo} from "../users/user-service";
 
 export async function sessionCreate(createSessionDto) {
-    return database('sessions').insert(createSessionDto, ['id']);
+    return database('sessions').insert(createSessionDto, ["id"]);
 }
 
 export async function sessionGet(sessionForeignId) {
