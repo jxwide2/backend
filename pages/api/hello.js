@@ -12,7 +12,7 @@ import {middlewareHelper} from "../../lib/middleware";
 // const hello = (req, res) => {
   // res.status(200).json({ name: 'John Doe' })
 // }
-const hello = middlewareHelper([authMiddleware, validationMiddleware('user')], (req, res) => {
+const hello = middlewareHelper([authMiddleware, validationMiddleware('session')], (req, res) => {
     //res.status(200).json({'d': 'd'})
     res.status(200).send('verified all')
 })
