@@ -9,6 +9,7 @@ import {getUserInfo} from "../users/user-service";
 export async function sessionCreate(createSessionDto, creatorId) {
     let session = await database('sessions').insert(createSessionDto, ["id"]);
     await createRelation(creatorId, session[0].id, 'owner');
+    return session;
 }
 
 export async function sessionGet(sessionForeignId) {
