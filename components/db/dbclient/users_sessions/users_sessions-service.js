@@ -21,3 +21,15 @@ export async function createRelation(userId, sessionId, role = "member") {
         .where('userRole', role)
         .first();
 }
+
+export async function getUsersIdsFromSession(sessionId) {
+    return database('users_sessions')
+        .where('sessionId', sessionId)
+        .select('userId')
+}
+
+export async function getSessionsIdsWhereUserId(userId) {
+    return database('users_sessions')
+        .where('userId', userId)
+        .select('sessionId')
+}
