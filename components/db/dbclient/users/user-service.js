@@ -30,3 +30,10 @@ export async function userLogin(username, password) {
         return e.message;
     }
 }
+
+export async function getUserInfo(userId) {
+    let {password, ...user} = await database('users')
+        .where('id', userId)
+        .first();
+    return user;
+}
