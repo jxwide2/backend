@@ -1,11 +1,10 @@
-import jwt from 'jsonwebtoken';
 import {userCreate, userLogin} from "../../components/db/dbclient/users/user-service";
 
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
 
     //если логин не в дб
-    const user = userLogin(req.body)
+    const user = await userLogin(req.body.username, req.body.password)
     console.log(user)
     res.status(user?.error ? 422 : 200).json(user)
 
