@@ -1,6 +1,6 @@
-import {sessionCreate, sessionGet} from "../../../components/db/dbclient/sessions/session-service";
+import {sessionCreate} from "../../../components/db/dbclient/sessions/session-service";
 import {middlewareHelper} from "../../../lib/middleware";
-//import {validationMiddleware} from "../../../lib/middleware/validation";
+import {authMiddleware} from "../../../lib/middleware/auth";
 
 
 
@@ -16,3 +16,5 @@ const sessions = middlewareHelper([authMiddleware], async (req, res) => {
         return res.status(200).json({sessions: sessions})
     }
 })
+
+export default sessions;
