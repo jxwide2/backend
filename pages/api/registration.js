@@ -1,14 +1,22 @@
 import jwt from 'jsonwebtoken';
 import {userCreate} from "../../components/db/dbclient/users/user-service";
+import {middlewareHelper} from "../../lib/middleware";
+import {validationMiddleware} from "../../lib/middleware/validation";
 
 
-export default async function handler(req, res) {
+const register = middlewareHelper([validationMiddleware('user')], async (req, res) => {
+    const {method, body} = req;
+    if (method === 'POST') {
+        const user = await userCreate(body)
 
-    //если логин не в дб
-    const user = await userCreate(req.body)
-    console.log(user)
-    res.status(user?.error ? 422 : 200).json(user)
+        res.status(user?.error ? 422 : 200).json(!user?.error ? {
+            user: user[0],
+            token: await jwt.sign({ userId: user[0]?.id}, process.env.SUPER_PRIVATE_KEY)
+        }: user)
+    }
 
-}
+})
+
+export default register;
 
 
