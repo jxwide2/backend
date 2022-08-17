@@ -9,10 +9,10 @@ const register = middlewareHelper([validationMiddleware('user')], async (req, re
     if (method === 'POST') {
         const user = await userCreate(body)
 
-        res.status(user?.error ? 422 : 200).json({
+        res.status(user?.error ? 422 : 200).json(!user?.error ? {
             user: user[0],
-            token: user?.error || await jwt.sign({ userId: user[0]?.id}, process.env.SUPER_PRIVATE_KEY)
-        })
+            token: await jwt.sign({ userId: user[0]?.id}, process.env.SUPER_PRIVATE_KEY)
+        }: user)
     }
 
 })
