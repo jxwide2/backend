@@ -7,12 +7,10 @@ export async function findAll() {
 
 export async function userCreate(createUserDto) {
     try {
-        await database('users').insert(createUserDto);
-        return database('users')
-            .where('username', createUserDto.username)
-            .first();
+        const i = await database('users').insert(createUserDto, ["id"]);
+        return i
     } catch (e) {
-        return e;
+        return {error: e.message}
     }
 }
 
@@ -27,7 +25,7 @@ export async function userLogin(username, password) {
         }
         return user;
     } catch (e) {
-        return e.message;
+        return {error: e.message};
     }
 }
 
