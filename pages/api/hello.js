@@ -13,7 +13,8 @@ import {middlewareHelper} from "../../lib/middleware";
   // res.status(200).json({ name: 'John Doe' })
 // }
 const hello = middlewareHelper([authMiddleware, validationMiddleware('user')], (req, res) => {
-    res.status(200).json({'d': 'd'})
+    //res.status(200).json({'d': 'd'})
+    res.status(200).send('verified all')
 })
 
 export default hello;
