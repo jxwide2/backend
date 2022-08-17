@@ -2,8 +2,12 @@ import {sessionCreate, sessionGet} from "../../../components/db/dbclient/session
 
 
 export default async function handler(req, res) {
-    if (req.method === 'GET') {
-        res.status(200).json(await sessionGet(req.body.id));
-        console.log(req.body);
-        }
+    let {body} = req;
+    if (req.method === 'POST') {
+        let session = await sessionCreate({
+            name: body.name
+        })
+        console.log(session)
+        res.status(200).json(session);
+    }
 }
