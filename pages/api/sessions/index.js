@@ -1,14 +1,17 @@
-export default function handler(req, res) {
+import {sessionCreate, sessionGet} from "../../../components/db/dbclient/sessions/session-service";
+
+export default async function handler(req, res) {
     if (req.method === 'POST') {
 
-        req.query.roomname
-        req.query.usercount
-        req.query.budget
-        req.query.enddate
+
+
+
+
 
         //создаем комнату
+        const a = await sessionCreate(req.body)
 
-        return res.status(200).json({id: id})
+        return res.status(200).json(a)
     } else {
 
         req.query.userid
