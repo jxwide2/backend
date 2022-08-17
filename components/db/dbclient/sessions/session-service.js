@@ -1,9 +1,14 @@
 import {database} from "../db";
-import {getSessionsIdsWhereUserId, getUsersIdsFromSession} from "../users_sessions/users_sessions-service";
+import {
+    createRelation,
+    getSessionsIdsWhereUserId,
+    getUsersIdsFromSession
+} from "../users_sessions/users_sessions-service";
 import {getUserInfo} from "../users/user-service";
 
-export async function sessionCreate(createSessionDto) {
-    return database('sessions').insert(createSessionDto, ["id"]);
+export async function sessionCreate(createSessionDto, creatorId) {
+    let session = await database('sessions').insert(createSessionDto, ["id"]);
+    await createRelation(creatorId, session[0].id, 'owner');
 }
 
 export async function sessionGet(sessionForeignId) {
