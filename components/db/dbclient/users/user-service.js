@@ -10,7 +10,7 @@ export async function userCreate(createUserDto) {
         const i = await database('users').insert(createUserDto, ["id"]);
         return i
     } catch (e) {
-        return e;
+        return {error: e.message}
     }
 }
 
@@ -25,6 +25,13 @@ export async function userLogin(username, password) {
         }
         return user;
     } catch (e) {
-        return e.message;
+        return {error: e.message};
     }
+}
+
+export async function getUserInfo(userId) {
+    let {password, ...user} = await database('users')
+        .where('id', userId)
+        .first();
+    return user;
 }
