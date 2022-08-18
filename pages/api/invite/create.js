@@ -6,9 +6,8 @@ import {createRelation} from "../../../components/db/dbclient/users_sessions/use
 
 const invite = middlewareHelper([authMiddleware], async (req, res, context) => {
 
-
-    const session = await jwt.sign(req.body.id, process.env.SUPER_PRIVATE_KEY)
-    return res.status(200).json({invite: session})
+    const invite = await jwt.sign(req.body.id, process.env.SUPER_PRIVATE_KEY)
+    return res.status(200).json({invite: invite})
 
 
 })

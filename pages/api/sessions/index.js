@@ -10,6 +10,7 @@ const sessions = middlewareHelper([authMiddleware], async (req, res, context) =>
 
     } else {
         const sessions = await getSessionsFromUser(context.id)
+        console.log(sessions)
         return res.status(200).json(sessions)
     }
 })
