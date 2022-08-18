@@ -6,7 +6,7 @@ export async function giftCreate(giftCreateDto) {
     //     - receiverId
     //     - sessionId
     if (!giftCreateDto.hasOwnProperty('senderId')){
-        throw new Error('Wrong data');
+        throw new Error('Wrong data')
     }
     return database('gifts').insert(giftCreateDto);
 }
@@ -33,6 +33,18 @@ export async function findGiftBySender(senderId) {
     try {
         return database('gifts')
             .where('senderId', senderId)
+    } catch {
+        return {
+            message: "not found error"
+        }
+    }
+}
+
+export async function findGiftBySenderAndSession(senderId, sessionId) {
+    try {
+        return database('gifts')
+            .where('senderId', senderId)
+            .where('sessionId', sessionId)
     } catch {
         return {
             message: "not found error"
