@@ -16,9 +16,7 @@ const start = middlewareHelper([authMiddleware], async (req, res, context) => {
 
 
     const id = await jwt.verify(req.body.id, process.env.SUPER_PRIVATE_KEY)
-    const session = await sessionGet(id)
     const role = await getUserRoleFromSession(id, context.id)
-    const relationUsers = []
     if (role[0] === "owner") {
         let users = getUsersIdsFromSession(id)
         let users1 = fp.shuffle([...users])
