@@ -17,14 +17,17 @@ const start = middlewareHelper([authMiddleware], async (req, res, context) => {
 
     const id = req.body.id
     const role = await getUserRoleFromSession(id, context.id)
-    if (role[0] === "owner") {
-        let users = getUsersIdsFromSession(id)
+    console.log(role)
+    if (role.userRole === "owner") {
+        let users = await getUsersIdsFromSession(id)
+        console.log(users)
         let users1 = fp.shuffle([...users])
         users = users1
         const [first, ...other] = users
         users1 = [other, first]
         users.forEach((userId, index) =>{
-            giftCreate({senderId: userId, receiverId: users1[index], sessionId: id})
+            console.log(userId.userId, users1[index].userId)
+            giftCreate({senderId: userId.userId, receiverId: users1[index].userId, sessionId: id})
         })
 
 
