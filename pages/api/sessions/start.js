@@ -15,7 +15,7 @@ import {giftCreate} from "../../../components/db/dbclient/gifts/gifts-service";
 const start = middlewareHelper([authMiddleware], async (req, res, context) => {
 
 
-    const id = await jwt.verify(req.body.id, process.env.SUPER_PRIVATE_KEY)
+    const id = req.body.id
     const role = await getUserRoleFromSession(id, context.id)
     if (role[0] === "owner") {
         let users = getUsersIdsFromSession(id)
