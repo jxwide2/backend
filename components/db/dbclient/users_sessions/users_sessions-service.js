@@ -33,3 +33,11 @@ export async function getSessionsIdsWhereUserId(userId) {
         .where('userId', userId)
         .select('sessionId')
 }
+
+export async function getUserRoleFromSession(sessionId, userId) {
+    return database('users_sessions')
+        .where('sessionId', sessionId)
+        .where('userId', userId)
+        .first()
+        .select('userRole')
+}

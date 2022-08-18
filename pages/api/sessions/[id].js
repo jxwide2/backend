@@ -1,23 +1,14 @@
-import {getUsersFromSession} from "../../../components/db/dbclient/sessions/session-service";
+import {getUsersFromSession, sessionGet} from "../../../components/db/dbclient/sessions/session-service";
+import {middlewareHelper} from "../../../lib/middleware";
+import {authMiddleware} from "../../../lib/middleware/auth";
 
-
-export default async function handler(req, res) {
-    let {id} = req.query;
+const handler = middlewareHelper([authMiddleware], async (req, res) => {
     if (req.method === 'GET') {
-        let users = await getUsersFromSession(id);
-        res.status(200).json(users);
+        let session = await sessionGet(+req.query.id)
+        let users = await getUsersFromSession(+req.query.id);
+        res.status(200).json({users: users, session: session});
     }
-}
+})
 
-export default function handler(req, res) {
+export default handler;
 
-    req.query.id
-
-    roomname
-    usercount
-    budget
-    enddate
-
-    return res.status(200).json({roomname: roomname, usercount: usercount, budget: budget, enddate: enddate})
-
-}
