@@ -12,7 +12,7 @@ import {
 } from "../../../components/db/dbclient/users_sessions/users_sessions-service";
 import {giftCreate} from "../../../components/db/dbclient/gifts/gifts-service";
 
-const start = middlewareHelper([authMiddleware()], async (req, res, context) => {
+const start = middlewareHelper([authMiddleware], async (req, res, context) => {
 
 
     const id = await jwt.verify(req.body.id, process.env.SUPER_PRIVATE_KEY)
