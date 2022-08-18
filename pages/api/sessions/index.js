@@ -9,6 +9,7 @@ const sessions = middlewareHelper([authMiddleware], async (req, res, context) =>
         //создаем комнату
         const a = await sessionCreate(req.body, context.id)
         return res.status(200).json(a)
+
     } else {
         const sessions = await getSessionsFromUser(context.id)
         return res.status(200).json(sessions)
