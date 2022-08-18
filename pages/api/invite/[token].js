@@ -10,7 +10,7 @@ const invite = middlewareHelper([authMiddleware], async (req, res, context) => {
 
 
     const sessionId = await jwt.verify(req.query.token, process.env.SUPER_PRIVATE_KEY)
-    createRelation(context.id, sessionId)
+    await createRelation(context.id, sessionId)
 
 
     return res.status(200).json({id: sessionId})
