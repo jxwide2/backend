@@ -1,6 +1,10 @@
 import {database} from "../db";
 
 export async function giftCreate(giftCreateDto) {
+    // giftCreateDto:
+    //     - senderId
+    //     - receiverId
+    //     - sessionId
     if (!giftCreateDto.hasOwnProperty('senderId')){
         throw new Error('Wrong data')
     }
@@ -14,22 +18,46 @@ export async function giftDelete(giftId) {
 }
 
 export async function findGiftById(giftId) {
-    return database('gifts')
-        .where('id', giftId)
-        .first();
+    try {
+        return database('gifts')
+            .where('id', giftId)
+            .first();
+    } catch {
+        return {
+            message: "not found error"
+        }
+    }
 }
 
 export async function findGiftBySender(senderId) {
-    return database('gifts')
-        .where('senderId', senderId)
+    try {
+        return database('gifts')
+            .where('senderId', senderId)
+    } catch {
+        return {
+            message: "not found error"
+        }
+    }
 }
 
 export async function findGiftByReceiver(receiverId) {
-    return database('gifts')
-        .where('receiverId', receiverId)
+    try {
+        return database('gifts')
+            .where('receiverId', receiverId)
+    } catch {
+        return {
+            message: "not found error"
+        }
+    }
 }
 
 export async function findGiftsBySession(sessionId) {
-    return database('gifts')
-        .where('sessionId', sessionId)
+    try {
+        return database('gifts')
+            .where('sessionId', sessionId)
+    } catch {
+        return {
+            message: "not found error"
+        }
+    }
 }
