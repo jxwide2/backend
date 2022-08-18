@@ -20,6 +20,10 @@ const start = middlewareHelper([authMiddleware], async (req, res, context) => {
     console.log(role)
     if (role.userRole === "owner") {
         let users = await getUsersIdsFromSession(id)
+        if (users.length === 1) {
+            res.status(406).json()
+            return
+        }
         console.log(users)
         let users1 = fp.shuffle([...users])
         users = users1
@@ -30,16 +34,7 @@ const start = middlewareHelper([authMiddleware], async (req, res, context) => {
             giftCreate({senderId: userId.userId, receiverId: users1[index].userId, sessionId: id})
         })
 
-
-        // while (true) {
-        //     users1 = fp.shuffle(users1)
-        //     users1.map((userId, index) => {
-        //         if (userId === users[index]) {
-        //             continue
-        //         }
-        //     })
-        // }
-        console.log(users1)
+        res.status(200).json()
     } else {
         res.status(200).json("куда мы лезем")
     }
