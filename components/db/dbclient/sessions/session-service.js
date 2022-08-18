@@ -6,14 +6,18 @@ import {
 } from "../users_sessions/users_sessions-service";
 import {getUserInfo} from "../users/user-service";
 
-export async function sessionCreate(createSessionDto, creatorId) {
+export async function sessionCreate(createSessionDto, creatorId = -1) {
     let session = await database('sessions').insert(createSessionDto, ["id"]);
-    await createRelation(creatorId, session[0].id, 'owner');
-    return session
+    if (creatorId !== -1) await createRelation(creatorId, session[0].id, 'owner');
+    return session;
 }
 
 export async function sessionGet(sessionForeignId) {
     return database('sessions').where('id', sessionForeignId)
+}
+
+export async function getAllSessions() {
+    return database('sessions');
 }
 
 export async function getUsersFromSession(sessionId) {
