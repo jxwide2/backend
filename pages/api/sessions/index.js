@@ -2,8 +2,6 @@ import {getSessionsFromUser, sessionCreate} from "../../../components/db/dbclien
 import {middlewareHelper} from "../../../lib/middleware";
 import {authMiddleware} from "../../../lib/middleware/auth";
 
-
-
 const sessions = middlewareHelper([authMiddleware], async (req, res, context) => {
     if (req.method === 'POST') {
         //создаем комнату
