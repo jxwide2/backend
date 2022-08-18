@@ -8,7 +8,7 @@ const handler = middlewareHelper([authMiddleware], async (req, res, context) => 
         let session = await sessionGet(+req.query.id)
         let users = await getUsersFromSession(+req.query.id);
         let id = await findGiftBySenderAndSession(context.id, +req.query.id)
-        res.status(200).json({users: users, session: session, id: id.id});
+        res.status(200).json({users: users, session: session, id: id[0].id});
     }
 })
 
