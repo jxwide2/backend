@@ -36,7 +36,7 @@ export async function getSessionsFromUser(userId) {
     let sessionsIds = await getSessionsIdsWhereUserId(userId);
     for (let i = 0; i < sessionsIds.length; i++) {
         let id = +sessionsIds[i].sessionId;
-        let session = sessionGet(id);
+        let session = await sessionGet(id);
         sessions.push(session);
     }
     return sessions;
